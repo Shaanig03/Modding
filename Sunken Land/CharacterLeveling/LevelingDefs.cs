@@ -10,14 +10,18 @@ namespace CharacterLeveling
     public static class LevelingDefs
     {
         // level
-        public static float config_maxLevel = 100;
+        public static float config_maxLevel = 150;
         public static int config_spendingPointsPerLevel = 3;
         public static float config_requiredXPToLevelUp = 250;
         public static float config_requiredXPToLevelUpMultiplierPerLevel = 0.05f;
+        public static Vector3 config_levelBarOffsetMultiplier = new Vector3(1, 1, 1);
 
         public static float config_xpadd_onItemSalvage = 2.5f;
-        public static float config_xpadd_onAIKill = 10;
+        public static float config_xpadd_onAIKill = 15;
         public static float config_xpadd_onItemLoot = 2.5f;
+        public static float config_xpadd_onItemChop = 2.5f;
+        public static float config_xpadd_onItemCraftPerItemRequirement = 1f;
+        public static float config_xpadd_onBuildPerItemRequirement = 2.5f;
 
         // stats
         public static float config_health_increasePerPoint = 0.35f;
@@ -27,7 +31,7 @@ namespace CharacterLeveling
         public static float config_walkrun_increasePerPoint = 0.1f;
         public static float config_lootSpeed_increasePerPoint = 0.05f;
         public static float config_salvageYield_newItemCountPerPoint = 0.35f;
-        public static float config_salvageYield_newItemChance = 7; // chance from 1-10
+        public static float config_salvageYield_newItemChance = 5; // chance from 1-10
 
         
 

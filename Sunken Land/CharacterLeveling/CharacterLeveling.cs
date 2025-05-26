@@ -184,18 +184,21 @@ namespace CharacterLeveling
             RectTransform t_lvlinfo = ui_lvlinfo.GetComponent<RectTransform>();
             ui_lvlinfo.transform.SetParent(t_stats);
 
+            Vector3 staminaBarOffsetMultiplier = LevelingDefs.config_levelBarOffsetMultiplier;
+
+
             // clone progress bar background from energy background
             GameObject cloned_bg = GameObject.Instantiate(t_stats.Find("Player energy Panel (1)/bg").gameObject);
             RectTransform t_clonedbg = cloned_bg.GetComponent<RectTransform>();
             t_clonedbg.SetParent(t_lvlinfo);
-            t_clonedbg.localPosition = new Vector3(424.0901f, 21.9021f, 0);
+            t_clonedbg.localPosition = new Vector3(424.0901f * staminaBarOffsetMultiplier.x, 21.9021f * staminaBarOffsetMultiplier.y, 0 * staminaBarOffsetMultiplier.z);
             t_clonedbg.sizeDelta = new Vector2(146, 16.3342f);
 
             // clone progress bar from hunger bar
             RectTransform t_cloned_pb = GameObject.Instantiate(t_mainPanels.Find("UICombat/Root/Combat GUI Group/StatePenal/Hunger Panel/hunger bar").gameObject).GetComponent<RectTransform>();
             t_cloned_pb.gameObject.name = "lvlbar";
             t_cloned_pb.SetParent(t_lvlinfo);
-            t_cloned_pb.localPosition = new Vector3(424.0901f, 21.9021f, 0);
+            t_cloned_pb.localPosition = new Vector3(424.0901f * staminaBarOffsetMultiplier.x, 21.9021f * staminaBarOffsetMultiplier.y, 0 * staminaBarOffsetMultiplier.z);
             t_cloned_pb.sizeDelta = new Vector2(146, 16.3342f);
             _lvlbar = t_cloned_pb.GetComponent<Image>();
             _lvlbar.color = Color.white;
@@ -213,7 +216,7 @@ namespace CharacterLeveling
             _txt_lvlinfo.alignment = TextAlignmentOptions.Center;
             _txt_lvlinfo.margin = new Vector4(140, 0, 0, 0);
             t_txt_lvlinfo.SetParent(t_lvlinfo);
-            t_txt_lvlinfo.localPosition = new Vector3(321.6909f, 21.9021f, 0);
+            t_txt_lvlinfo.localPosition = new Vector3(321.6909f * staminaBarOffsetMultiplier.x, 21.9021f * staminaBarOffsetMultiplier.y, 0 * staminaBarOffsetMultiplier.z);
             _txt_lvlinfo.fontSize = 7;
             _txt_lvlinfo.fontSizeMax = 14;
             _txt_lvlinfo.color = Color.white;

@@ -129,3 +129,11 @@ D:\Projects\Game Modding & Scripting\Sunken Land\CharacterLeveling\CharacterLeve
 D:\Projects\Game Modding & Scripting\Sunken Land\CharacterLeveling\CharacterLeveling\obj\Debug\CharacterLeveling.pdb
 D:\Projects\Game Modding & Scripting\Sunken Land\CharacterLeveling\CharacterLeveling\bin\Debug\Unity.Localization.dll
 D:\Projects\Game Modding & Scripting\Sunken Land\CharacterLeveling\CharacterLeveling\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\bin\Debug\CharacterLeveling.dll
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\bin\Debug\CharacterLeveling.pdb
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.csproj.AssemblyReference.cache
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.csproj.CoreCompileInputs.cache
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.csproj.CopyComplete
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.dll
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.pdb

@@ -44,9 +44,18 @@ namespace CharacterLeveling
                 LevelingDefs.config_requiredXPToLevelUp = float.Parse(config.SelectSingleNode("config_requiredXPToLevelUp").InnerText);
                 LevelingDefs.config_requiredXPToLevelUpMultiplierPerLevel = float.Parse(config.SelectSingleNode("config_requiredXPToLevelUpMultiplierPerLevel").InnerText);
 
+                string[] config_levelBarOffsetMultiplier = config.SelectSingleNode("config_levelBarOffsetMultiplier").InnerText.Split(',');
+                LevelingDefs.config_levelBarOffsetMultiplier = new Vector3(float.Parse(config_levelBarOffsetMultiplier[0]), float.Parse(config_levelBarOffsetMultiplier[1]), float.Parse(config_levelBarOffsetMultiplier[2]));
+
+
+
                 LevelingDefs.config_xpadd_onItemSalvage = float.Parse(config.SelectSingleNode("config_xpadd_onItemSalvage").InnerText);
                 LevelingDefs.config_xpadd_onAIKill = float.Parse(config.SelectSingleNode("config_xpadd_onAIKill").InnerText);
                 LevelingDefs.config_xpadd_onItemLoot = float.Parse(config.SelectSingleNode("config_xpadd_onItemLoot").InnerText);
+                LevelingDefs.config_xpadd_onItemChop = float.Parse(config.SelectSingleNode("config_xpadd_onItemChop").InnerText);
+                LevelingDefs.config_xpadd_onItemCraftPerItemRequirement = float.Parse(config.SelectSingleNode("config_xpadd_onItemCraftPerItemRequirement").InnerText);
+                LevelingDefs.config_xpadd_onBuildPerItemRequirement = float.Parse(config.SelectSingleNode("config_xpadd_onBuildPerItemRequirement").InnerText);
+                
 
                 LevelingDefs.config_health_increasePerPoint = float.Parse(config.SelectSingleNode("config_health_increasePerPoint").InnerText);
                 LevelingDefs.config_stamina_increasePerPoint = float.Parse(config.SelectSingleNode("config_stamina_increasePerPoint").InnerText);
@@ -56,6 +65,9 @@ namespace CharacterLeveling
                 LevelingDefs.config_lootSpeed_increasePerPoint = float.Parse(config.SelectSingleNode("config_lootSpeed_increasePerPoint").InnerText);
                 LevelingDefs.config_salvageYield_newItemCountPerPoint = float.Parse(config.SelectSingleNode("config_salvageYield_newItemCountPerPoint").InnerText);
                 LevelingDefs.config_salvageYield_newItemChance = float.Parse(config.SelectSingleNode("config_salvageYield_newItemChance").InnerText);
+
+
+
             } else
             {
                 // create a new config file
@@ -66,11 +78,19 @@ namespace CharacterLeveling
                 writer.WriteElementString("config_spendingPointsPerLevel", LevelingDefs.config_spendingPointsPerLevel.ToString());
                 writer.WriteElementString("config_requiredXPToLevelUp", LevelingDefs.config_requiredXPToLevelUp.ToString());
                 writer.WriteElementString("config_requiredXPToLevelUpMultiplierPerLevel", LevelingDefs.config_requiredXPToLevelUpMultiplierPerLevel.ToString());
+                Vector3 config_levelBarOffsetMultiplier = LevelingDefs.config_levelBarOffsetMultiplier;
+                writer.WriteElementString("config_levelBarOffsetMultiplier", $"{config_levelBarOffsetMultiplier.x},{config_levelBarOffsetMultiplier.y},{config_levelBarOffsetMultiplier.z}");
+
+
 
                 writer.WriteElementString("config_xpadd_onItemSalvage", LevelingDefs.config_xpadd_onItemSalvage.ToString());
                 writer.WriteElementString("config_xpadd_onAIKill", LevelingDefs.config_xpadd_onAIKill.ToString());
                 writer.WriteElementString("config_xpadd_onItemLoot", LevelingDefs.config_xpadd_onItemLoot.ToString());
+                writer.WriteElementString("config_xpadd_onItemChop", LevelingDefs.config_xpadd_onItemChop.ToString());
+                writer.WriteElementString("config_xpadd_onItemCraftPerItemRequirement", LevelingDefs.config_xpadd_onItemCraftPerItemRequirement.ToString());
+                writer.WriteElementString("config_xpadd_onBuildPerItemRequirement", LevelingDefs.config_xpadd_onBuildPerItemRequirement.ToString());
 
+                
                 writer.WriteElementString("config_health_increasePerPoint", LevelingDefs.config_health_increasePerPoint.ToString());
                 writer.WriteElementString("config_stamina_increasePerPoint", LevelingDefs.config_stamina_increasePerPoint.ToString());
                 writer.WriteElementString("config_oxygen_increasePerPoint", LevelingDefs.config_oxygen_increasePerPoint.ToString());
@@ -119,6 +139,7 @@ namespace CharacterLeveling
 
            
             Harmony.CreateAndPatchAll(Assembly, $"{ModInfo.GUID}");
+            
 
             Logger.LogDebug($"Mod successfully loaded");
         }
