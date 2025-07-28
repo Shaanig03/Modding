@@ -1,0 +1,189 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|CharacterLeveling||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|d:\\projects\\github\\modding\\modding\\sunken land\\characterleveling\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\levelingdefs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:levelingdefs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\patches.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:patches.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\img2sprite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:img2sprite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\characterleveling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:characterleveling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\uilevelingbookbtnspendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:uilevelingbookbtnspendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\modifiedcollectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:modifiedcollectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\modinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|solutionrelative:modinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61382FE8-784D-4C5E-9CC9-109FE00D3618}|CharacterLeveling.csproj|d:\\projects\\github\\modding\\modding\\sunken land\\characterleveling\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 222,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CharacterLeveling",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\CharacterLeveling.csproj",
+              "RelativeDocumentMoniker": "CharacterLeveling.csproj",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\CharacterLeveling.csproj*",
+              "RelativeToolTip": "CharacterLeveling.csproj*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-15T12:09:39.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Plugin.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\Plugin.cs",
+              "RelativeDocumentMoniker": "Plugin.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\Plugin.cs",
+              "RelativeToolTip": "Plugin.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAQwJ4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LevelingDefs.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\LevelingDefs.cs",
+              "RelativeDocumentMoniker": "LevelingDefs.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\LevelingDefs.cs",
+              "RelativeToolTip": "LevelingDefs.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAQwEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Patches.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\Patches.cs",
+              "RelativeDocumentMoniker": "Patches.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\Patches.cs",
+              "RelativeToolTip": "Patches.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoBAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.79Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ModifiedCollectable.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\ModifiedCollectable.cs",
+              "RelativeDocumentMoniker": "ModifiedCollectable.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\ModifiedCollectable.cs",
+              "RelativeToolTip": "ModifiedCollectable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.662Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ModInfo.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\ModInfo.cs",
+              "RelativeDocumentMoniker": "ModInfo.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\ModInfo.cs",
+              "RelativeToolTip": "ModInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IMG2Sprite.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\IMG2Sprite.cs",
+              "RelativeDocumentMoniker": "IMG2Sprite.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\IMG2Sprite.cs",
+              "RelativeToolTip": "IMG2Sprite.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UILevelingBookBtnSpendPoint.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\UILevelingBookBtnSpendPoint.cs",
+              "RelativeDocumentMoniker": "UILevelingBookBtnSpendPoint.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\UILevelingBookBtnSpendPoint.cs",
+              "RelativeToolTip": "UILevelingBookBtnSpendPoint.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAQwIIAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CharacterLeveling.cs",
+              "DocumentMoniker": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\CharacterLeveling.cs",
+              "RelativeDocumentMoniker": "CharacterLeveling.cs",
+              "ToolTip": "D:\\Projects\\Github\\Modding\\Modding\\Sunken Land\\CharacterLeveling\\CharacterLeveling.cs",
+              "RelativeToolTip": "CharacterLeveling.cs",
+              "ViewState": "AQIAAKYAAAAAAAAAAAD4v7YAAABYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T16:11:42.84Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 345,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

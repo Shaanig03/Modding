@@ -306,6 +306,7 @@ namespace CharacterLeveling
             {
                 float xpaddvalue = LevelingDefs.config_xpadd_onItemSalvage;
 
+                int i = 0;
                 // loop through each salvage yield items
                 foreach (Item _item in modifiedCollectable.salvageYieldItems)
                 {
@@ -318,6 +319,7 @@ namespace CharacterLeveling
                     {
                         characterLeveling.playerCharacter.AddItem(transform.GetComponent<Item>(), true);
                         characterLeveling.xp += xpaddvalue;
+                        i++;
                     }
 
                     var audioClips = Traverse.Create(__instance).Field("sndCollect").GetValue<AudioClip[]>();
@@ -328,6 +330,7 @@ namespace CharacterLeveling
                         RM.code.PlayOneShot(audioClips[UnityEngine.Random.Range(0, clipCount)], UnityEngine.Random.Range(0.9f, 1.1f));
                     }
                 }
+                Plugin.Logger.LogDebug($"{i} bonus items salvaged");
             }
             
             return true;
