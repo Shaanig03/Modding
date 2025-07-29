@@ -5,6 +5,8 @@ using BepInEx.Logging;
 using HarmonyLib;
 using VanillaExpandedLoreFriendly.Items.Equipment;
 using Newtonsoft.Json;
+using System;
+using UnityEngine;
 
 namespace VanillaExpandedLoreFriendly
 {
@@ -16,22 +18,56 @@ namespace VanillaExpandedLoreFriendly
         private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
 
         public static string modFolder = Path.GetDirectoryName(Assembly.Location);
+
         public static string fileLangJSON = modFolder + @"\lang.json";
+        public static string fileConfigJSON = modFolder + @"\config.json";
 
 
-        private void LangJson()
+        public static Plugin Get;
+
+        // creates or loads lang.json
+        private void LangJSON()
         {
+            
             if (!File.Exists(fileLangJSON))
             {
+                // creates a new .json file
                 FileStream fs = new FileStream(fileLangJSON, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 fs.Close();
                 File.WriteAllText(fileLangJSON, JsonConvert.SerializeObject(Vars.lang, Formatting.Indented));
             }
+            else
+            {
+                // loads .json file
+                Vars.lang = JsonConvert.DeserializeObject<Lang>(File.ReadAllText(fileLangJSON));
+            }
         }
 
+        // creates or loads config.json
+        private void ConfigJSON()
+        {
+            if (!File.Exists(fileConfigJSON))
+            {
+                // creates a new .json file
+                FileStream fs = new FileStream(fileConfigJSON, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                fs.Close();
+
+                File.WriteAllText(fileConfigJSON, JsonConvert.SerializeObject(Vars.config, Formatting.Indented));
+            }
+            else
+            {
+                // loads .json file
+                Vars.config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(fileConfigJSON));
+            }
+
+            // load key save from .json
+            Vars.key_save = (KeyCode)Enum.Parse(typeof(KeyCode), Vars.config.key_save, true);
+        }
 
         private void Awake()
         {
+            Get = this;
+
             // set project-scoped logger instance
             Logger = base.Logger;
 
@@ -40,8 +76,13 @@ namespace VanillaExpandedLoreFriendly
             Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
 
 
+            // create config.json
+            ConfigJSON();
+
             // create lang.json
-            LangJson();
+            LangJSON();
+
+
 
 
             // print mod has loaded

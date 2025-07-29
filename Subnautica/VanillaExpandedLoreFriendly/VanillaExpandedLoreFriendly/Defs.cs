@@ -7,12 +7,9 @@ using UnityEngine;
 
 namespace VanillaExpandedLoreFriendly
 {
-    public static class Vars
+    public static class Defs
     {
-        public static Config config = new Config(); 
-        public static Lang lang = new Lang();
 
-        public static KeyCode key_save = KeyCode.F2;
 
     }
 }
