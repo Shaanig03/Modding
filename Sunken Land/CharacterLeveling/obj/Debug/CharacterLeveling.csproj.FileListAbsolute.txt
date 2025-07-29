@@ -134,6 +134,7 @@ D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\bin\Debug\Chara
 D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\bin\Debug\Newtonsoft.Json.dll
 D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.csproj.AssemblyReference.cache
 D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.csproj.CoreCompileInputs.cache
-D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.csproj.CopyComplete
 D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.dll
 D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\CharacterLeveling.pdb
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\Github\Modding\Modding\Sunken Land\CharacterLeveling\obj\Debug\Characte.E4FFFBA6.Up2Date

@@ -55,11 +55,11 @@ namespace CharacterLeveling
 
         public void ModifySalvageYield(int salvageYieldPoints, int level)
         {
-            int itemCount = Mathf.RoundToInt(UnityEngine.Random.Range(0, LevelingDefs.config_salvageYield_newItemCountPerPoint * salvageYieldPoints));
+            int itemCount = Mathf.RoundToInt(UnityEngine.Random.Range(0, LevelingDefs.config.config_salvageYield_newItemCountPerPoint * salvageYieldPoints));
 
             for(int i = 0; i < itemCount; i++)
             {
-                if(UnityEngine.Random.Range(0, 10) >= LevelingDefs.config_salvageYield_newItemChance) //
+                if(UnityEngine.Random.Range(0, 10) >= LevelingDefs.config.config_salvageYield_newItemChance) //
                 {
 
                     var possibleItem = collectable.possibleItems[UnityEngine.Random.Range(0, collectable.possibleItems.Count)];

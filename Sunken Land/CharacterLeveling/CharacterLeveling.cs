@@ -1,24 +1,25 @@
-﻿using DG.Tweening.Core.Easing;
+﻿using Condition;
+using Cysharp.Threading.Tasks.Triggers;
+using DG.Tweening;
+using DG.Tweening.Core.Easing;
+using ES3Types;
+using Fusion;
+using HarmonyLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
-using UnityEngine;
-using HarmonyLib;
 using System.Xml;
-using System.Data;
 using TMPro;
-using Cysharp.Threading.Tasks.Triggers;
-using Condition;
-using System.Diagnostics.Eventing.Reader;
-using UnityEngine.UI;
 using UltimateSurvival;
-using Fusion;
+using UnityEngine;
 using UnityEngine.Localization.Components;
-using ES3Types;
+using UnityEngine.UI;
 using static UnityEngine.Random;
-using DG.Tweening;
 
 namespace CharacterLeveling
 {
@@ -27,33 +28,33 @@ namespace CharacterLeveling
 
         public PlayerCharacter playerCharacter;
 
-        public int level { get { return _level; }set { _level = value; UpdateLvlTxt(); if (_lvlbar != null) { _lvlbar.fillAmount = 0; } } }
-        private int _level = 1;
+        public int level { get { return stats._level; }set { stats._level = value; UpdateLvlTxt(); if (_lvlbar != null) { _lvlbar.fillAmount = 0; } } }
+        
 
-        public int spendingPoints { get { return _spendingPoints; } set { _spendingPoints = value; } }
-        private int _spendingPoints;
+        public int spendingPoints { get { return stats._spendingPoints; } set { stats._spendingPoints = value; } }
+        
 
         public static CharacterLeveling Instance;
-        public float xp { get { return _xp; }set {
-                _xp = value;
+        public float xp { get { return stats._xp; }set {
+                stats._xp = value;
 
                 UpdateLvlbarValue();
                 // while there is xp && required xp to level up is assigned
-                if (_xp >= _requiredXPToLevelUp && _requiredXPToLevelUp != -1)
+                if (stats._xp >= _requiredXPToLevelUp && _requiredXPToLevelUp != -1)
                 {
                     // while required xp to level up is assigned && there is xp
                     while (_requiredXPToLevelUp != -1 && xp > 0)
                     {
                         // if xp reaches required xp to level up
-                        if (_xp >= _requiredXPToLevelUp)
+                        if (stats._xp >= _requiredXPToLevelUp)
                         {
                             // if level hasn't reached max level
-                            if (level < LevelingDefs.config_maxLevel)
+                            if (level < LevelingDefs.config.config_maxLevel)
                             {
                                 // reduce xp and level up
-                                _xp -= _requiredXPToLevelUp;
+                                stats._xp -= _requiredXPToLevelUp;
                                 level += 1;
-                                spendingPoints += LevelingDefs.config_spendingPointsPerLevel;
+                                spendingPoints += LevelingDefs.config.config_spendingPointsPerLevel;
 
                                 // set next required xp to level up
                                 SetNextRequiredXPToLevelUp();
@@ -69,7 +70,7 @@ namespace CharacterLeveling
                 }
             } }
 
-        private float _xp;
+        
         private float _requiredXPToLevelUp = -1;
 
         
@@ -79,19 +80,13 @@ namespace CharacterLeveling
         private string file_leveling;
 
 
-        public float original_health;
-        public float original_stamina;
-        public float original_oxygen = 120f;
+        
+
         public float original_swimSpeed = 2.645f;
-        //public float original_walkSpeed = 3.3f;
-        public float original_runSpeed;
-        public int points_health;
-        public int points_stamina;
-        public int points_oxygen;
-        public int points_swimming;
-        public int points_running;
-        public int points_lootSpeed;
-        public int points_salvageYield;
+
+
+
+        public CharacterStats stats = new CharacterStats();
 
         public float swimSpeed;
         public float walkSpeed;
@@ -118,7 +113,7 @@ namespace CharacterLeveling
             playerCharacter = GetComponent<PlayerCharacter>();
             //swimSpeed = original_swimSpeed;
             //walkSpeed = original_walkSpeed;
-            runSpeed = original_runSpeed;
+            runSpeed = stats.original_runSpeed;
 
             // create empty gameObject for audio
             GameObject empty_audioSource = new GameObject();
@@ -184,7 +179,7 @@ namespace CharacterLeveling
             RectTransform t_lvlinfo = ui_lvlinfo.GetComponent<RectTransform>();
             ui_lvlinfo.transform.SetParent(t_stats);
 
-            Vector3 staminaBarOffsetMultiplier = LevelingDefs.config_levelBarOffsetMultiplier;
+            Vector3 staminaBarOffsetMultiplier = LevelingDefs.config.config_levelBarOffsetMultiplier;
 
 
             // clone progress bar background from energy background
@@ -231,7 +226,7 @@ namespace CharacterLeveling
         private TextMeshProUGUI _txt_lvlinfo;
         private float _lvlbar_value;
 
-        void UpdateLvlbarValue() { _lvlbar_value = LevelingDefs.ConvertRange(0, _requiredXPToLevelUp, 0, 1, _xp); }
+        void UpdateLvlbarValue() { _lvlbar_value = LevelingDefs.ConvertRange(0, _requiredXPToLevelUp, 0, 1, stats._xp); }
         void UpdateLvlbarUI() { if (_lvlbar == null) { return; } _lvlbar.fillAmount = Mathf.Lerp(_lvlbar.fillAmount, _lvlbar_value, 5 * Time.deltaTime); }
         void UpdateLvlTxt() { if (_txt_lvlinfo == null) { return; } _txt_lvlinfo.text = $"Lvl {level}:"; }
         void CreateLevelingBookUI()
@@ -482,9 +477,12 @@ namespace CharacterLeveling
             LevelingBookPanelInput();
             UpdateLvlbarUI();
         }
-
+        
         public void Save()
         {
+            File.WriteAllText(file_leveling, JsonConvert.SerializeObject(stats, Newtonsoft.Json.Formatting.Indented));
+
+            /*
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(file_leveling);
 
@@ -504,8 +502,10 @@ namespace CharacterLeveling
             xdoc.Save(file_leveling);
 
             Plugin.Logger.LogDebug($"character levels saved");
-        }
 
+            */
+        }
+        
    
 
         
@@ -531,7 +531,7 @@ namespace CharacterLeveling
                 var interaction = focusedInteractionParent.GetComponentInChildren<Interaction>();
                 modifiedCollectable.originalDuration = interaction.InteractionTime;
                 modifiedCollectable.interaction = interaction;
-                modifiedCollectable.ModifySalvageYield(points_salvageYield, level);
+                modifiedCollectable.ModifySalvageYield(stats.points_salvageYield, level);
             }
             modifiedCollectable.setDuration = modifiedCollectable.originalDuration - lootSpeed;
             
@@ -564,8 +564,8 @@ namespace CharacterLeveling
             var tr_defaultStatus = Traverse.Create(defaultStatus);
 
             // update health
-            float newHealthIncreaseAmount = (LevelingDefs.config_health_increasePerPoint * points_health);
-            float newHealth = original_health + newHealthIncreaseAmount;
+            float newHealthIncreaseAmount = (LevelingDefs.config.config_health_increasePerPoint * stats.points_health);
+            float newHealth = stats.original_health + newHealthIncreaseAmount;
 
             // modify health
             tr_defaultStatus.Field("maxHealth").SetValue(newHealth);
@@ -580,8 +580,8 @@ namespace CharacterLeveling
 
 
             // update stamina
-            float newStaminaIncreaseAmount = (LevelingDefs.config_stamina_increasePerPoint * points_stamina);
-            float newStamina = original_stamina + newStaminaIncreaseAmount;
+            float newStaminaIncreaseAmount = (LevelingDefs.config.config_stamina_increasePerPoint * stats.points_stamina);
+            float newStamina = stats.original_stamina + newStaminaIncreaseAmount;
             tr_defaultStatus.Field("maxEnergy").SetValue(newStamina);
             tr_defaultStatus.Field("energy").SetValue(newStamina);
             
@@ -592,8 +592,8 @@ namespace CharacterLeveling
 
             
             // update oxygen // #continue #oxygen bug
-            float newOxygenIncreaseAmount = (LevelingDefs.config_oxygen_increasePerPoint * points_oxygen);
-            float newOxygen = original_oxygen + newOxygenIncreaseAmount;
+            float newOxygenIncreaseAmount = (LevelingDefs.config.config_oxygen_increasePerPoint * stats.points_oxygen);
+            float newOxygen = stats.original_oxygen + newOxygenIncreaseAmount;
             tr_defaultStatus.Field("maxAir").SetValue(newOxygen);
             tr_defaultStatus.Field("air").SetValue(newOxygen);
 
@@ -603,30 +603,30 @@ namespace CharacterLeveling
             
 
             // update swimming
-            float newSwimmingIncreaseAmount = (LevelingDefs.config_swimming_increasePerPoint * points_swimming);
+            float newSwimmingIncreaseAmount = (LevelingDefs.config.config_swimming_increasePerPoint * stats.points_swimming);
             float newSwimming = original_swimSpeed + newSwimmingIncreaseAmount;
             swimSpeed = newSwimming;
 
             // update walk/run
-            float newWalkRunIncreaseAmount = (LevelingDefs.config_walkrun_increasePerPoint * points_running);
+            float newWalkRunIncreaseAmount = (LevelingDefs.config.config_walkrun_increasePerPoint * stats.points_running);
             walkSpeed = newWalkRunIncreaseAmount;
             runSpeed = newWalkRunIncreaseAmount;
 
             // update loot speed
-            lootSpeed = (LevelingDefs.config_lootSpeed_increasePerPoint * points_lootSpeed);
+            lootSpeed = (LevelingDefs.config.config_lootSpeed_increasePerPoint * stats.points_lootSpeed);
         }
         void SetNextRequiredXPToLevelUp()
         {
-            float multiplier = 1 + (LevelingDefs.config_requiredXPToLevelUpMultiplierPerLevel * level);
-            _requiredXPToLevelUp = LevelingDefs.config_requiredXPToLevelUp * multiplier;
+            float multiplier = 1 + (LevelingDefs.config.config_requiredXPToLevelUpMultiplierPerLevel * level);
+            _requiredXPToLevelUp = LevelingDefs.config.config_requiredXPToLevelUp * multiplier;
         }
 
        
         void Load()
         {
             // store original values
-            original_health = playerCharacter.MaxHealth;
-            original_stamina = playerCharacter.MaxEnergy;
+            stats.original_health = playerCharacter.MaxHealth;
+            stats.original_stamina = playerCharacter.MaxEnergy;
             //original_oxygen = playerCharacter.MaxAir;
 
             // get save manager
@@ -654,33 +654,43 @@ namespace CharacterLeveling
 
             if (!Directory.Exists(saveLoc_characterWorld)) { Directory.CreateDirectory(saveLoc_characterWorld); }
 
-            file_leveling = saveLoc_characterWorld + @"\leveling.xml";
+            file_leveling = saveLoc_characterWorld + @"\leveling.json";
 
             if (!File.Exists(file_leveling))
             {
+                // creates a new .json file
+                FileStream fs = new FileStream(file_leveling, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                fs.Close();
+
+                File.WriteAllText(file_leveling, JsonConvert.SerializeObject(stats, Newtonsoft.Json.Formatting.Indented));
+
+                /*
                 XmlWriter writer = LevelingDefs.NewXmlWriter(file_leveling);
                 writer.WriteStartElement("lvling");
-                writer.WriteElementString("originalHealth", original_health.ToString());
-                writer.WriteElementString("originalStamina", original_stamina.ToString());
-                writer.WriteElementString("originalOxygen", original_oxygen.ToString());
+                writer.WriteElementString("originalHealth", stats.original_health.ToString());
+                writer.WriteElementString("originalStamina", stats.original_stamina.ToString());
+                writer.WriteElementString("originalOxygen", stats.original_oxygen.ToString());
 
                 writer.WriteElementString("level", level.ToString());
                 writer.WriteElementString("xp", xp.ToString());
                 writer.WriteElementString("spendingPoints", spendingPoints.ToString());
 
-                writer.WriteElementString("points_health", points_health.ToString());
-                writer.WriteElementString("points_stamina", points_stamina.ToString());
-                writer.WriteElementString("points_oxygen", points_oxygen.ToString());
-                writer.WriteElementString("points_swimming", points_swimming.ToString());
-                writer.WriteElementString("points_running", points_running.ToString());
-                writer.WriteElementString("points_lootSpeed", points_lootSpeed.ToString());
-                writer.WriteElementString("points_salvageYield", points_salvageYield.ToString());
+                writer.WriteElementString("points_health", stats.points_health.ToString());
+                writer.WriteElementString("points_stamina", stats.points_stamina.ToString());
+                writer.WriteElementString("points_oxygen", stats.points_oxygen.ToString());
+                writer.WriteElementString("points_swimming", stats.points_swimming.ToString());
+                writer.WriteElementString("points_running", stats.points_running.ToString());
+                writer.WriteElementString("points_lootSpeed", stats.points_lootSpeed.ToString());
+                writer.WriteElementString("points_salvageYield", stats.points_salvageYield.ToString());
 
                 writer.WriteEndElement();
-                writer.Close();
+                writer.Close();*/
             }
             else
             {
+                stats = JsonConvert.DeserializeObject<CharacterStats>(File.ReadAllText(file_leveling));
+
+                /*
                 XmlDocument xdoc = new XmlDocument();
                 xdoc.Load(file_leveling);
 
@@ -701,6 +711,7 @@ namespace CharacterLeveling
                 points_running = int.Parse(node_lvling.SelectSingleNode("points_running").InnerText);
                 points_lootSpeed = int.Parse(node_lvling.SelectSingleNode("points_lootSpeed").InnerText);
                 points_salvageYield = int.Parse(node_lvling.SelectSingleNode("points_salvageYield").InnerText);
+                */
             }
         }
 

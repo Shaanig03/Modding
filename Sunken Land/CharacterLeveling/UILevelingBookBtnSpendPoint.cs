@@ -55,37 +55,37 @@ namespace CharacterLeveling
             {
                 case "health":
                     {
-                        current_points = characterLeveling.points_health;
+                        current_points = characterLeveling.stats.points_health;
                         break;
                     }
                 case "stamina":
                     {
-                        current_points = characterLeveling.points_stamina;
+                        current_points = characterLeveling.stats.points_stamina;
                         break;
                     }
                 case "oxygen":
                     {
-                        current_points = characterLeveling.points_oxygen;
+                        current_points = characterLeveling.stats.points_oxygen;
                         break;
                     }
                 case "swimming":
                     {
-                        current_points = characterLeveling.points_swimming;
+                        current_points = characterLeveling.stats.points_swimming;
                         break;
                     }
                 case "walkrun":
                     {
-                        current_points = characterLeveling.points_running;
+                        current_points = characterLeveling.stats.points_running;
                         break;
                     }
                 case "salvagespeed":
                     {
-                        current_points = characterLeveling.points_lootSpeed;
+                        current_points = characterLeveling.stats.points_lootSpeed;
                         break;
                     }
                 case "salvageyield":
                     {
-                        current_points = characterLeveling.points_salvageYield;
+                        current_points = characterLeveling.stats.points_salvageYield;
                         break;
                     }
                 default: { break; }
@@ -107,37 +107,37 @@ namespace CharacterLeveling
             {
                 case "health":
                     {
-                        characterLeveling.points_health += 1;
+                        characterLeveling.stats.points_health += 1;
                         break;
                     }
                 case "stamina":
                     {
-                        characterLeveling.points_stamina += 1;
+                        characterLeveling.stats.points_stamina += 1;
                         break;
                     }
                 case "oxygen":
                     {
-                        characterLeveling.points_oxygen += 1;
+                        characterLeveling.stats.points_oxygen += 1;
                         break;
                     }
                 case "swimming":
                     {
-                        characterLeveling.points_swimming += 1;
+                        characterLeveling.stats.points_swimming += 1;
                         break;
                     }
                 case "walkrun":
                     {
-                        characterLeveling.points_running += 1;
+                        characterLeveling.stats.points_running += 1;
                         break;
                     }
                 case "salvagespeed":
                     {
-                        characterLeveling.points_lootSpeed += 1;
+                        characterLeveling.stats.points_lootSpeed += 1;
                         break;
                     }
                 case "salvageyield":
                     {
-                        characterLeveling.points_salvageYield += 1;
+                        characterLeveling.stats.points_salvageYield += 1;
                         break;
                     }
                 default: { break; }

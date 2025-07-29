@@ -7,8 +7,56 @@ using UnityEngine;
 
 namespace CharacterLeveling
 {
+    public class CharacterStats
+    {
+        public float original_health;
+        public float original_stamina;
+        public float original_oxygen = 120f;
+
+        public int _level = 1;
+        public float _xp;
+        public int _spendingPoints;
+
+        //public float original_walkSpeed = 3.3f;
+        public float original_runSpeed;
+        public int points_health;
+        public int points_stamina;
+        public int points_oxygen;
+        public int points_swimming;
+        public int points_running;
+        public int points_lootSpeed;
+        public int points_salvageYield;
+    }
+    public class Config
+    {
+        public float config_maxLevel = 150;
+        public int config_spendingPointsPerLevel = 3;
+        public float config_requiredXPToLevelUp = 250;
+        public float config_requiredXPToLevelUpMultiplierPerLevel = 0.05f;
+        public Vector3 config_levelBarOffsetMultiplier = new Vector3(1, 1, 1);
+
+        public float config_xpadd_onItemSalvage = 2.5f;
+        public float config_xpadd_onAIKill = 15;
+        public float config_xpadd_onItemLoot = 2.5f;
+        public float config_xpadd_onItemChop = 2.5f;
+        public float config_xpadd_onItemCraftPerItemRequirement = 1f;
+        public float config_xpadd_onBuildPerItemRequirement = 2.5f;
+
+        // stats
+        public float config_health_increasePerPoint = 0.35f;
+        public float config_stamina_increasePerPoint = 0.35f;
+        public float config_oxygen_increasePerPoint = 0.5f;
+        public float config_swimming_increasePerPoint = 0.1f;
+        public float config_walkrun_increasePerPoint = 0.1f;
+        public float config_lootSpeed_increasePerPoint = 0.05f;
+        public float config_salvageYield_newItemCountPerPoint = 0.35f;
+        public float config_salvageYield_newItemChance = 5; // chance from 1-10
+    }
+
     public static class LevelingDefs
     {
+        public static Config config = new Config();
+        /*
         // level
         public static float config_maxLevel = 150;
         public static int config_spendingPointsPerLevel = 3;
@@ -32,7 +80,7 @@ namespace CharacterLeveling
         public static float config_lootSpeed_increasePerPoint = 0.05f;
         public static float config_salvageYield_newItemCountPerPoint = 0.35f;
         public static float config_salvageYield_newItemChance = 5; // chance from 1-10
-
+        */
         
 
 

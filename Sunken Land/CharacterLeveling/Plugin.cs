@@ -11,6 +11,7 @@ using System.Xml;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 namespace CharacterLeveling
 {
@@ -23,7 +24,7 @@ namespace CharacterLeveling
 
 
         public static string modFolder = Path.GetDirectoryName(Assembly.Location);
-        public static string configFile = modFolder + @"\config.xml";
+        public static string configFile = modFolder + @"\config.json";
 
         public static string assembyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string assetsFolder = assembyLocation + @"\" + "Assets";
@@ -32,8 +33,11 @@ namespace CharacterLeveling
 
         private void SetupConfig()
         {
+            // if file exists, then load from .json
             if (File.Exists(configFile))
             {
+                LevelingDefs.config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(configFile));
+                /*
                 // load config file
                 XmlDocument xdoc = new XmlDocument();
                 xdoc.Load(configFile);
@@ -65,11 +69,23 @@ namespace CharacterLeveling
                 LevelingDefs.config_lootSpeed_increasePerPoint = float.Parse(config.SelectSingleNode("config_lootSpeed_increasePerPoint").InnerText);
                 LevelingDefs.config_salvageYield_newItemCountPerPoint = float.Parse(config.SelectSingleNode("config_salvageYield_newItemCountPerPoint").InnerText);
                 LevelingDefs.config_salvageYield_newItemChance = float.Parse(config.SelectSingleNode("config_salvageYield_newItemChance").InnerText);
-
+                */
 
 
             } else
             {
+                // creates a new .json file
+                FileStream fs = new FileStream(configFile, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                fs.Close();
+
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                File.WriteAllText(configFile, JsonConvert.SerializeObject(LevelingDefs.config, Newtonsoft.Json.Formatting.Indented, settings));
+
+                // if file doesn't exist
+                /*
                 // create a new config file
                 XmlWriter writer = LevelingDefs.NewXmlWriter(configFile);
                 writer.WriteStartElement("config");
@@ -101,7 +117,7 @@ namespace CharacterLeveling
                 writer.WriteElementString("config_salvageYield_newItemChance", LevelingDefs.config_salvageYield_newItemChance.ToString());
 
                 writer.WriteEndElement();
-                writer.Close();
+                writer.Close();*/
             }
         }
 

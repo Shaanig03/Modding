@@ -27,7 +27,7 @@ namespace CharacterLeveling
             foreach (var _requirement in piece.Craftable.itemRequirements)
             {
                 Plugin.Logger.LogDebug($"#temp {_requirement.item} {_requirement.amount}x");
-                characterLeveling.xp += LevelingDefs.config_xpadd_onBuildPerItemRequirement * _requirement.amount;
+                characterLeveling.xp += LevelingDefs.config.config_xpadd_onBuildPerItemRequirement * _requirement.amount;
             }
         }
 
@@ -47,7 +47,7 @@ namespace CharacterLeveling
 
             foreach (var _requirement in requirements)
             {
-                characterLeveling.xp += LevelingDefs.config_xpadd_onItemCraftPerItemRequirement * _requirement.amount;
+                characterLeveling.xp += LevelingDefs.config.config_xpadd_onItemCraftPerItemRequirement * _requirement.amount;
 
                 Plugin.Logger.LogDebug($"#temp requirement '{_requirement.item}' {_requirement.amount}");
             }
@@ -85,7 +85,7 @@ namespace CharacterLeveling
                 CharacterLeveling characterLeveling = CharacterLeveling.Instance;
                 if (characterLeveling != null)
                 {
-                    characterLeveling.xp += LevelingDefs.config_xpadd_onItemChop;
+                    characterLeveling.xp += LevelingDefs.config.config_xpadd_onItemChop;
                 }
             }
 
@@ -138,7 +138,7 @@ namespace CharacterLeveling
                     CharacterLeveling characterLeveling = CharacterLeveling.Instance;
                     if (characterLeveling != null)
                     {
-                        characterLeveling.xp += LevelingDefs.config_xpadd_onItemChop;
+                        characterLeveling.xp += LevelingDefs.config.config_xpadd_onItemChop;
                     }
                 }
             }
@@ -171,7 +171,7 @@ namespace CharacterLeveling
                         CharacterLeveling characterLeveling = CharacterLeveling.Instance;
                         if(characterLeveling != null)
                         {
-                            characterLeveling.xp += LevelingDefs.config_xpadd_onItemChop;
+                            characterLeveling.xp += LevelingDefs.config.config_xpadd_onItemChop;
                         }
                     }
                 }
@@ -197,7 +197,7 @@ namespace CharacterLeveling
                 if(characterLeveling != null)
                 {
                     // add xp for each contained item
-                    float xpvalue = LevelingDefs.config_xpadd_onItemLoot * __instance.GetComponent<Storage>().Items.Count(x => x != null);
+                    float xpvalue = LevelingDefs.config.config_xpadd_onItemLoot * __instance.GetComponent<Storage>().Items.Count(x => x != null);
                     characterLeveling.xp += xpvalue;
                 }
             }
@@ -223,7 +223,7 @@ namespace CharacterLeveling
                     CharacterLeveling characterLeveling = source.GetComponent<CharacterLeveling>();
                     if (characterLeveling != null)
                     {
-                        characterLeveling.xp += LevelingDefs.config_xpadd_onAIKill;
+                        characterLeveling.xp += LevelingDefs.config.config_xpadd_onAIKill;
                     }
                 }
             }
@@ -268,7 +268,7 @@ namespace CharacterLeveling
                 CharacterLeveling instance = CharacterLeveling.Instance;
                 if (instance != null)
                 {
-                    float xpaddvalue = LevelingDefs.config_xpadd_onItemSalvage;
+                    float xpaddvalue = LevelingDefs.config.config_xpadd_onItemSalvage;
                     instance.xp += xpaddvalue;
                 }
             }
@@ -300,11 +300,11 @@ namespace CharacterLeveling
         {
             
             ModifiedCollectable modifiedCollectable = __instance.GetComponent<ModifiedCollectable>();
-
+            
 
             if(modifiedCollectable != null)
             {
-                float xpaddvalue = LevelingDefs.config_xpadd_onItemSalvage;
+                float xpaddvalue = LevelingDefs.config.config_xpadd_onItemSalvage;
 
                 int i = 0;
                 // loop through each salvage yield items
