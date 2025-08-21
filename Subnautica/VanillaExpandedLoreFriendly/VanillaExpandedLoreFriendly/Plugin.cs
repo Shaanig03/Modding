@@ -1,12 +1,14 @@
-﻿using System.Reflection;
-using System.IO;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using VanillaExpandedLoreFriendly.Items.Equipment;
+using Nautilus.Handlers;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.IO;
+using System.Reflection;
 using UnityEngine;
+using VanillaExpandedLoreFriendly.Items.Equipment;
 
 namespace VanillaExpandedLoreFriendly
 {
@@ -15,84 +17,63 @@ namespace VanillaExpandedLoreFriendly
     public class Plugin : BaseUnityPlugin
     {
         public new static ManualLogSource Logger { get; private set; }
-        private static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
 
-        public static string modFolder = Path.GetDirectoryName(Assembly.Location);
 
-        public static string fileLangJSON = modFolder + @"\lang.json";
-        public static string fileConfigJSON = modFolder + @"\config.json";
+        public static InGameConfig ingameConfig = OptionsPanelHandler.RegisterModOptions<InGameConfig>();
 
 
         public static Plugin Get;
 
-        // creates or loads lang.json
-        private void LangJSON()
+        /*
+        System.Collections.IEnumerator IStart()
         {
-            
-            if (!File.Exists(fileLangJSON))
-            {
-                // creates a new .json file
-                FileStream fs = new FileStream(fileLangJSON, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
-                fs.Close();
-                File.WriteAllText(fileLangJSON, JsonConvert.SerializeObject(Vars.lang, Formatting.Indented));
-            }
-            else
-            {
-                // loads .json file
-                Vars.lang = JsonConvert.DeserializeObject<Lang>(File.ReadAllText(fileLangJSON));
-            }
-        }
+            WaitForSeconds delay = new WaitForSeconds(1);
 
-        // creates or loads config.json
-        private void ConfigJSON()
+            float alarmSirenVolume = -1;
+            while (this != null)
+            {
+                if(alarmSirenVolume != ingameConfig.alarmSirenVolume) { alarmSirenVolume = ingameConfig.alarmSirenVolume; Registries.RegisterAlarmSirenSound(); }
+                yield return delay;
+            }
+        }*/
+
+        void Start()
         {
-            if (!File.Exists(fileConfigJSON))
-            {
-                // creates a new .json file
-                FileStream fs = new FileStream(fileConfigJSON, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
-                fs.Close();
 
-                File.WriteAllText(fileConfigJSON, JsonConvert.SerializeObject(Vars.config, Formatting.Indented));
-            }
-            else
-            {
-                // loads .json file
-                Vars.config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(fileConfigJSON));
-            }
-
-            // load key save from .json
-            Vars.key_save = (KeyCode)Enum.Parse(typeof(KeyCode), Vars.config.key_save, true);
         }
 
         private void Awake()
         {
             Get = this;
+            
 
             // set project-scoped logger instance
             Logger = base.Logger;
 
-
             // register harmony patches, if there are any
-            Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
+            Harmony.CreateAndPatchAll(Vars.Assembly, $"{PluginInfo.PLUGIN_GUID}");
 
+            // get vanilla prefabs
+            StartCoroutine(VEMethods.GetVanillaPrefabs());
 
-            // create config.json
-            ConfigJSON();
+            // initialize variables
+            Vars.Init();
 
-            // create lang.json
-            LangJSON();
+            Vars.texture_alarm_bright_red = VEMethods.LoadTexture(Vars.assetsFolder + @"\bright_red.png", 512, 512);     // Vars.assetBundle.LoadAsset("bright_red") as Texture2D;
+            Vars.texture_alarm_dark_red = VEMethods.LoadTexture(Vars.assetsFolder + @"\dark_red.png", 512, 512);
 
+            // register all
+            this.StartCoroutine(Registries.RegisterAll());
 
-
+            VESaveData.Get = SaveDataHandler.RegisterSaveDataCache<VESaveData>();
 
             // print mod has loaded
             Log(Vars.lang.mod_has_loaded);
         }
 
-
-        public static void Log(string txt, bool error = false) { if (!error) { Logger.LogDebug(txt); } else { Logger.LogError($"#Error: {txt}"); } }
-
-
-
+        public static void Log(string txt, bool error = false, bool displayOnScreen = false) { 
+            if (!error) { Logger.LogDebug(txt); } else { Logger.LogError($"#Error: {txt}"); }
+            if (displayOnScreen) { ErrorMessage.AddMessage(txt); }
+        }
     }
 }

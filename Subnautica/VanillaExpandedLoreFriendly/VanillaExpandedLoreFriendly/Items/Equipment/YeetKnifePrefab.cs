@@ -4,7 +4,7 @@ using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
 using Nautilus.Extensions;
 using UnityEngine;
-using Ingredient = CraftData.Ingredient;
+//using Ingredient = CraftData.Ingredient;
 
 namespace VanillaExpandedLoreFriendly.Items.Equipment
 {

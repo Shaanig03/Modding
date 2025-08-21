@@ -7,9 +7,8 @@ using UnityEngine;
 
 namespace VanillaExpandedLoreFriendly
 {
-    public static class Defs
+    public class VEController : MonoBehaviour
     {
-
 
     }
 }

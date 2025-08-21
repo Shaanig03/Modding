@@ -80,17 +80,11 @@
             },
             "Subnautica.GameLibs": {
               "target": "Package",
-              "version": "[71288.0.0-r.0, )"
+              "version": "[82304.0.0-r.0, )"
             },
             "Subnautica.Nautilus": {
-              "suppressParent": "All",
               "target": "Package",
-              "version": "[1.*-*, )"
-            },
-            "UnityEngine.Modules": {
-              "include": "Compile",
-              "target": "Package",
-              "version": "[2019.4.36, )"
+              "version": "[1.0.0-pre.42, )"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302\\RuntimeIdentifierGraph.json"
