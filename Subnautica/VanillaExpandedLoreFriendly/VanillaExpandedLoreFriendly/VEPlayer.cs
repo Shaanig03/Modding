@@ -20,18 +20,16 @@ namespace VanillaExpandedLoreFriendly
 
         private UITurretConfiguration ui_turretConfig;
 
+
+        
         System.Collections.IEnumerator Start() {
-
-            // instantiate ui turret
-            ui_turretConfig = GameObject.Instantiate(Registries.prefab_ui_turretConfiguration).GetComponent<UITurretConfiguration>();
-            
-
             // wait until loading is finished
             yield return new WaitUntil(() => !SaveLoadManager.main.isLoading);
 
-            player = GetComponent<Player>();
+            // instantiate ui turret
+            ui_turretConfig = GameObject.Instantiate(Registries.prefab_ui_turretConfiguration).GetComponent<UITurretConfiguration>();
 
-            
+            player = GetComponent<Player>();
 
             loaded = true;
         }
@@ -41,42 +39,34 @@ namespace VanillaExpandedLoreFriendly
         {
             if (!loaded) { return; }
 
-            
             // turret configuration UI
             if (Input.GetKeyDown(Vars.key_turretConfig))
             {
-                if (!ui_turretConfig.state)
+                // get camera
+                Camera cam = player.camRoot.mainCam;
+
+                // camera forward & position
+                UnityEngine.Vector3 camForward = cam.transform.forward;
+                UnityEngine.Vector3 camPos = cam.transform.position + (camForward * 1.2f);
+
+                // create ray
+                Ray ray = new Ray(camPos, camForward);
+                RaycastHit hit;
+
+                // shoot ray
+                if (Physics.Raycast(ray, out hit, 6, Physics.AllLayers, QueryTriggerInteraction.Ignore))
                 {
-                    // get camera
-                    Camera cam = player.camRoot.mainCam;
+                    Collider col = hit.collider;
 
-                    // camera forward & position
-                    UnityEngine.Vector3 camForward = cam.transform.forward;
-                    UnityEngine.Vector3 camPos = cam.transform.position + (camForward * 1.2f);
 
-                    // create ray
-                    Ray ray = new Ray(camPos, camForward);
-                    RaycastHit hit;
+                    TargetingCore targetingCore = col.GetComponent<TargetingCore>();
+                    if (targetingCore == null) { targetingCore = col.GetComponentInParent<TargetingCore>(); }
 
-                    // shoot ray
-                    if (Physics.Raycast(ray, out hit, 6, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                    // if targeting core was found
+                    if (targetingCore != null)
                     {
-                        Collider col = hit.collider;
-
-
-                        TargetingCore targetingCore = col.GetComponent<TargetingCore>();
-                        if (targetingCore == null) { targetingCore = col.GetComponentInParent<TargetingCore>(); }
-
-                        // if targeting core was found
-                        if (targetingCore != null)
-                        {
-                            ui_turretConfig.Open(targetingCore);
-                        }
+                        ui_turretConfig.Open(targetingCore);
                     }
-                }
-                else
-                {
-                    ui_turretConfig.Close();
                 }
             }
 

@@ -12,16 +12,51 @@ namespace VanillaExpandedLoreFriendly.UI
 {
     public class UITurretConfiguration : uGUI_InputGroup
     {
-        public bool state { get; private set; }
+        public bool state
+        {
+
+            get { return _state; }
+            set { 
+                _state = value;
+
+                if(turretRangeIndicatorSphere != null)
+                {
+                    if (_state)
+                    {
+                        turretRangeIndicatorSphere.SetActive(true);
+                    }
+                    else
+                    {
+                        turretRangeIndicatorSphere.SetActive(false);
+                    }
+                }
+            }
+        }
+
+        private bool _state;
         public CanvasGroup canvasGroup;
 
 
-        public TargetingCore target;
+        public TargetingCore target
+        {
+            get { return _target; }
+            set {
+                _target = value;
+                turretRangeIndicatorSphere.transform.position = value.visionObject.transform.position;
+            }
+        }
+        private TargetingCore _target;
+
         public TMP_InputField txtbox_targets;
         public TMP_InputField txtbox_targetingRange;
 
         public Player player;
 
+        private GameObject turretRangeIndicatorSphere;
+        
+
+
+        
         public override void Awake()
         {
             base.Awake();
@@ -46,6 +81,9 @@ namespace VanillaExpandedLoreFriendly.UI
 
             txtbox_targets = transform.Find("BG/Txtbox_targetWords").GetComponent<TMP_InputField>();
             txtbox_targetingRange = transform.Find("BG/Txtbox_visionRange").GetComponent<TMP_InputField>();
+
+            turretRangeIndicatorSphere = GameObject.Instantiate(Registries.prefab_indicatorSphere);
+            turretRangeIndicatorSphere.gameObject.SetActive(false);
         }
 
         void ApplyForTurret()
@@ -220,6 +258,14 @@ namespace VanillaExpandedLoreFriendly.UI
             base.Update();
             if (this.state)
             {
+                float targetingRange;
+
+                if(float.TryParse(txtbox_targetingRange.text, out targetingRange))
+                {
+                    float size = targetingRange * 2;
+                    turretRangeIndicatorSphere.transform.localScale = new Vector3(size, size, size);
+                }
+
                 MainCameraControl.main.SaveLockedVRViewModelAngle();
                 this.canvasGroup.alpha = 1f;
                 this.canvasGroup.interactable = true;

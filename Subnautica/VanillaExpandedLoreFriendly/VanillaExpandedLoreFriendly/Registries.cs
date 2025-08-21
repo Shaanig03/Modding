@@ -39,9 +39,11 @@ namespace VanillaExpandedLoreFriendly
         public static string sound_turretFire_rifleMK1;
         //-----------
 
-
+        // uis
         public static GameObject prefab_ui_turretConfiguration;
 
+        // indicators
+        public static GameObject prefab_indicatorSphere;
         public static System.Collections.IEnumerator RegisterAll()
         {
             yield return new WaitUntil(() => SaveLoadManager.main != null);
@@ -51,8 +53,15 @@ namespace VanillaExpandedLoreFriendly
             RegisterBuildables();
             RegisterItems();
             RegisterUIs();
+            RegisterIndicators();
         }
 
+        private static void RegisterIndicators()
+        {
+            AssetBundle assetBundle = Vars.assetBundle;
+
+            prefab_indicatorSphere = assetBundle.LoadAsset<GameObject>("VEIndicatorSphere");
+        }
         private static void RegisterUIs()
         {
             AssetBundle assetBundle = Vars.assetBundle;
