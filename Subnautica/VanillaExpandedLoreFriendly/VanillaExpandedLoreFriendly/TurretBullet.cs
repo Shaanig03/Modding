@@ -18,6 +18,8 @@ namespace VanillaExpandedLoreFriendly
         public float speed;
         private Rigidbody rigi;
 
+        public PoolContainer hitFxPool;
+
         void Awake()
         {
             rigi = GetComponent<Rigidbody>();
@@ -42,8 +44,12 @@ namespace VanillaExpandedLoreFriendly
                 liveMixin.TakeDamage(damage, transform.position, DamageType.Normal, firedBy);
             }
 
+            // hit fx
+            if (hitFxPool != null) { hitFxPool.TakeObjectFromPool(transform.position, Quaternion.identity); }
+
             // add object to pool
             poolObject.AddObjectToPool();
+            
         }
     }
 }

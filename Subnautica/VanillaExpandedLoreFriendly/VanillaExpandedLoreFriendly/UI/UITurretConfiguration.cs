@@ -79,6 +79,11 @@ namespace VanillaExpandedLoreFriendly.UI
             transform.Find("BG/BtnApplyForTurret/Text (TMP)").GetComponent<TextMeshProUGUI>().text = Vars.lang.ui_turretConfig_btn_applyForThisTurret;
             transform.Find("BG/BtnApplyForTurrets/Text (TMP)").GetComponent<TextMeshProUGUI>().text = Vars.lang.ui_turretConfig_btn_applyForNearbyTurrets;
 
+            transform.Find("BG/Txtbox_targetWords/Text Area/Placeholder").GetComponent<TextMeshProUGUI>().text = Vars.lang.ui_turretConfig_txtbox_targets_entertext;
+            
+
+
+
             txtbox_targets = transform.Find("BG/Txtbox_targetWords").GetComponent<TMP_InputField>();
             txtbox_targetingRange = transform.Find("BG/Txtbox_visionRange").GetComponent<TMP_InputField>();
 
@@ -137,7 +142,7 @@ namespace VanillaExpandedLoreFriendly.UI
             if (!errorFound) { Close(); }
         }
 
-        
+
         bool ApplyChangesToCore(TargetingCore targetingCore)
         {
             float targetingRadius;
@@ -176,9 +181,13 @@ namespace VanillaExpandedLoreFriendly.UI
                 }
                 targetingCore.targetNames = list.ToArray();
             }
+            else
+            {
+                targetingCore.targetNames = new string[] { };
+            }
 
-            // set target to null
-            targetingCore.Target = null;    
+                // set target to null
+                targetingCore.Target = null;    
             return successful;
         }
 

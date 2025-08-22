@@ -76,6 +76,8 @@ namespace VanillaExpandedLoreFriendly.Buildables
 
         public virtual void OnEnable()
         {
+            if(constructable == null) { constructable = GetComponent<Constructable>(); }
+
             // start fire coroutine
             if (coroutineFire != null) {StopCoroutine(coroutineFire); coroutineFire = null;}
             coroutineFire = StartCoroutine(IFire());
@@ -86,6 +88,10 @@ namespace VanillaExpandedLoreFriendly.Buildables
 
             // start target searching
             targetingCore.StartTargetSearching();
+
+            // start power consumption coroutine
+            if(coroutine_powerConsumption != null) { StopCoroutine(coroutine_powerConsumption); coroutine_powerConsumption = null;}
+            coroutine_powerConsumption = StartCoroutine(VETurretMethods.IPowerConsumption(this));
 
             ErrorMessage.AddMessage($"#temp OnEnable fired");
         }
@@ -106,7 +112,7 @@ namespace VanillaExpandedLoreFriendly.Buildables
 
         public virtual void Start()
         {
-            constructable = GetComponent<Constructable>();
+            
             powerRelay = GetComponentInParent<PowerRelay>();
             anim_prop_turretFiring = Animator.StringToHash("firing");
 

@@ -18,7 +18,8 @@ namespace VanillaExpandedLoreFriendly
         public float portablePowerStation_powerGenDelay = 1f;
         public float portablePowerStation_powerGenUnits = 10;
         public int poolSize_fxMuzzleSmoke = 40;
+        public int poolSize_fxPlasmaHit = 18;
         public int poolSize_bullet_blastermk1 = 100;
-
+        public int poolSize_bullet_plasma = 100;
     }
 }

@@ -33,9 +33,11 @@ namespace VanillaExpandedLoreFriendly
 
         public string buildable_rifleturretmk1_displayName = "Blaster MK1";
         public string buildable_rifleturretmk1_desc = "Medium-cost basic defense turret, used by the Degasi survivors";
+        public string buildable_plasmaturret_displayName = "Plasma Turret";
+        public string buildable_plasmaturret_desc = "High-cost high fire-rate advanced defense turret, used by the Degasi survivors";
 
         public string item_blasterturretmk1_ammo = "Ammunition Case (Blaster MK1)";
-
+        public string item_plasmaturret_ammo = "Ammunition Case (Plasma Turret)";
 
         public string ui_turretConfig_title = "Turret Configuration";
         public string ui_turretConfig_label_targetingRange = "Targeting Range:";
@@ -44,6 +46,7 @@ namespace VanillaExpandedLoreFriendly
         public string ui_turretConfig_label_tipTargets = $"(Note: type down a part of the creature's name you want to target, these names are separated by commas, eg: 'reaper, ghost, peep', targets any creature that has the name containing one of those words)";
         public string ui_turretConfig_btn_applyForThisTurret = "Apply (For This Turret)";
         public string ui_turretConfig_btn_applyForNearbyTurrets = "Apply (For Nearby Turrets)";
+        public string ui_turretConfig_txtbox_targets_entertext = "Enter text...";
 
         public string txt_turretConfig_applyChanges_targetingRangeIsNotNumber = "failed to convert targeting range to a number";
         public string txt_turretConfig_applyChanges_turretsApplied = "{0} turrets within 100 radius has been modified";

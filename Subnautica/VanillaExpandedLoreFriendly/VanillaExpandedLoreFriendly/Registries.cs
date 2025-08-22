@@ -37,6 +37,7 @@ namespace VanillaExpandedLoreFriendly
         public static string sound_alarmSirenSound;
 
         public static string sound_turretFire_rifleMK1;
+        public static string sound_turretFire_plasma;
         //-----------
 
         // uis
@@ -44,6 +45,7 @@ namespace VanillaExpandedLoreFriendly
 
         // indicators
         public static GameObject prefab_indicatorSphere;
+
         public static System.Collections.IEnumerator RegisterAll()
         {
             yield return new WaitUntil(() => SaveLoadManager.main != null);
@@ -73,6 +75,10 @@ namespace VanillaExpandedLoreFriendly
         {
             AssetBundle assetBundle = Vars.assetBundle;
 
+
+
+            // blaster turret mk1 ammo  
+            //--------------------------------------------
             var customPrefab_blasterTurretMK1Ammo = new CustomPrefab(
                     "turretblastermk1_ammo",
                     Vars.lang.item_blasterturretmk1_ammo,
@@ -80,8 +86,6 @@ namespace VanillaExpandedLoreFriendly
                     assetBundle.LoadAsset<UnityEngine.Sprite>("icon_ammunitionCase")
             );
 
-            // blaster turret mk1 ammo  
-            //--------------------------------------------
             VEMethods.RegisterItem(customPrefab_blasterTurretMK1Ammo,
                 new CloneTemplate(customPrefab_blasterTurretMK1Ammo.Info, TechType.Battery)
                 {
@@ -107,6 +111,41 @@ namespace VanillaExpandedLoreFriendly
                 TechType.None,
                 0);
             //--------------------------------------------
+
+            // plasma turret ammo  
+            //--------------------------------------------
+            var customPrefab_plasmaTurretAmmo = new CustomPrefab(
+                    "turretplasma_ammo",
+                    Vars.lang.item_plasmaturret_ammo,
+                    "...",
+                    assetBundle.LoadAsset<UnityEngine.Sprite>("icon_ammunitionCasePlasma")
+            );
+
+            VEMethods.RegisterItem(customPrefab_plasmaTurretAmmo,
+                new CloneTemplate(customPrefab_plasmaTurretAmmo.Info, TechType.Battery)
+                {
+                    ModifyPrefab = delegate (GameObject prefab)
+                    {
+                        VEMethods.ModifyItemToAmmoBox(prefab, 1000);
+                    }
+                }, new Vector2int(1, 1),
+                new Nautilus.Crafting.RecipeData
+                {
+                    Ingredients =
+                    {
+                        new Ingredient(TechType.Titanium, 1),
+                        new Ingredient(TechType.JellyPlant, 2)
+                    },
+                    craftAmount = 4
+                }
+                ,
+                CraftTree.Type.Fabricator,
+                CraftTreeHandler.Paths.FabricatorsBasicMaterials,
+                TechGroup.Resources,
+                TechCategory.BasicMaterials,
+                TechType.None,
+                0);
+            //--------------------------------------------
         }
 
         private static void RegisterPoolObjects()
@@ -116,9 +155,19 @@ namespace VanillaExpandedLoreFriendly
 
             // create pools
             PoolDefs.CreatePool("fx_muzzlesmoke", assetBundle.LoadAsset<GameObject>("FxMuzzleSmoke"), Vars.config.poolSize_fxMuzzleSmoke, 1.5f);
-            VETurretMethods.CreateBulletPool("bullet_blastermk1", assetBundle.LoadAsset<GameObject>("BlasterMK1Projectile"), Vars.config.poolSize_bullet_blastermk1, 5f, 10, 8000);
+            PoolDefs.CreatePool("fx_plasmahit", assetBundle.LoadAsset<GameObject>("FxPlasmaHit"), Vars.config.poolSize_fxPlasmaHit, 0.5f);
 
             
+            VETurretMethods.CreateBulletPool("bullet_blastermk1", assetBundle.LoadAsset<GameObject>("BlasterMK1Projectile"), Vars.config.poolSize_bullet_blastermk1, 5f, 10, 8000);
+            VETurretMethods.CreateBulletPool("bullet_plasma", assetBundle.LoadAsset<GameObject>("PlasmaProjectile"), Vars.config.poolSize_bullet_plasma, 5f, 10, 8000);
+
+
+            PoolContainer pool_fx_plasmaHit = PoolDefs.pools["fx_plasmahit"];
+            foreach(PoolObject _bulletPlasma in PoolDefs.pools["bullet_plasma"].poolObjects)
+            {
+                _bulletPlasma.GetComponent<TurretBullet>().hitFxPool = pool_fx_plasmaHit;
+            }
+
         }
 
         public static AudioClip alarmSirenAudioClip;
@@ -137,7 +186,7 @@ namespace VanillaExpandedLoreFriendly
             sound_cabinet_close = RegisterSoundEffect(assetBundle.LoadAsset<AudioClip>("cabinet_close"), "ve_cabinet_close");
 
             sound_turretFire_rifleMK1 = RegisterSoundEffect(assetBundle.LoadAsset<AudioClip>("rifleTurretFireSound"), "ve_rifleTurretFireSound");
-
+            sound_turretFire_plasma = RegisterSoundEffect(assetBundle.LoadAsset<AudioClip>("fxsound_plasmaTurret"), "ve_plasmaTurretFireSound");
 
 
             alarmSirenAudioClip = Vars.assetBundle.LoadAsset<AudioClip>("alarm_siren_loop");
@@ -315,7 +364,7 @@ namespace VanillaExpandedLoreFriendly
             //--------------------------------------------
             //--------------------------------------------
 
-            // (advanced) rifle turret mk1
+            // rifle turret mk1
             //--------------------------------------------
             GameObject prefab_rifleTurretMK1 = assetBundle.LoadAsset<GameObject>("BlasterMK1");
             Constructable constructable_rifleTurretMK1;
@@ -357,13 +406,65 @@ namespace VanillaExpandedLoreFriendly
             };
 
             // register turret
-            VETurretMethods.RegisterTurret(prefab_rifleTurretMK1, "blastermk1", turretRifleMK1, 250);
+            VETurretMethods.RegisterTurret(prefab_rifleTurretMK1, "blastermk1", turretRifleMK1, 100);
             prefab_rifleTurretMK1.GetComponent<TargetingCore>().visionObject = prefab_rifleTurretMK1.transform.Find("Model/0/Armature.003/TurretHolder 1/TurretCore 1").gameObject;
 
 
             // construction settings
             constructable_rifleTurretMK1.DefaultSettings(false);
             constructable_rifleTurretMK1.placeMaxDistance = 10;
+            //--------------------------------------------
+
+
+            // plasma turret
+            //--------------------------------------------
+            GameObject prefab_plasmaTurret = assetBundle.LoadAsset<GameObject>("PlasmaTurret");
+            Constructable constructable_plasmaTurret;
+            VEMethods.RegisterBuildableObject
+            (
+                "ve_plasmaturret",
+                Vars.lang.buildable_plasmaturret_displayName,
+                Vars.lang.buildable_plasmaturret_desc,
+                assetBundle.LoadAsset<Sprite>("icon_plasmaTurret"),
+                prefab_plasmaTurret,
+                TechGroup.ExteriorModules,
+                TechCategory.ExteriorModule,
+                new Nautilus.Crafting.RecipeData(new Ingredient[] { new Ingredient(TechType.TitaniumIngot, 1), new Ingredient(TechType.ComputerChip, 1), new Ingredient(TechType.Kyanite, 1) }),
+                TechType.None,
+                0,
+                out constructable_plasmaTurret
+            );
+
+            // add turret rifle mk1 component
+            TurretPlasma plasmaTurret = prefab_plasmaTurret.AddComponent<TurretPlasma>();
+            plasmaTurret.fireDelay = 0.3f;
+            Transform t_plasmaTurret_turret = prefab_plasmaTurret.transform.Find("Model/0/Armature.014/root/mainRotator/mainCannon");
+
+            // set fire sound
+            plasmaTurret.fire_soundName = sound_turretFire_plasma;
+
+            // set rotators
+            plasmaTurret.rotators = new GameObject[]
+            {
+                plasmaTurret.transform.Find("Model/0/Armature.014/root/mainRotator").gameObject,
+                plasmaTurret.transform.Find("Model/0/Armature.014/root/mainRotator/mainCannon").gameObject
+            };
+
+            // set fire fx muzzles
+            plasmaTurret.fire_fx_muzzles = new ParticleSystem[]
+            {
+                t_plasmaTurret_turret.Find("fx_muzzle").GetComponent<ParticleSystem>(),
+                t_plasmaTurret_turret.Find("fx_muzzle (1)").GetComponent<ParticleSystem>(),
+            };
+
+            // register turret
+            VETurretMethods.RegisterTurret(prefab_plasmaTurret, "plasmaturret", plasmaTurret, 100);
+            prefab_plasmaTurret.GetComponent<TargetingCore>().visionObject = prefab_plasmaTurret.transform.Find("Model/0/Armature.014/root/mainRotator").gameObject;
+
+
+            // construction settings
+            constructable_plasmaTurret.DefaultSettings(false);
+            constructable_plasmaTurret.placeMaxDistance = 10;
             //--------------------------------------------
 
         }

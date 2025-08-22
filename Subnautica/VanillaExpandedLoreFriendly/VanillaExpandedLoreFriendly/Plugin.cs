@@ -8,7 +8,6 @@ using System.Collections;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
-using VanillaExpandedLoreFriendly.Items.Equipment;
 
 namespace VanillaExpandedLoreFriendly
 {

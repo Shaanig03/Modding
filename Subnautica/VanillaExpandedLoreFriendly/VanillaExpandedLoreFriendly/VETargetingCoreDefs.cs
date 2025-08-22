@@ -116,7 +116,7 @@ namespace VanillaExpandedLoreFriendly
                 if (target != null && target.IsAlive())
                 {
                     // get target name (in lower case)
-                    string targetName = _col.gameObject.name.ToLower();
+                    string targetName = target.gameObject.name.ToLower();
 
                     // do a target check name
                     foreach (string _specified_targetName in targetingCore.targetNames)

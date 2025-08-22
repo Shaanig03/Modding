@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Valve.VR;
-using VanillaExpandedLoreFriendly.Items.Equipment;
 using static UnityEngine.ParticleSystem.PlaybackState;
 
 namespace VanillaExpandedLoreFriendly.Buildables

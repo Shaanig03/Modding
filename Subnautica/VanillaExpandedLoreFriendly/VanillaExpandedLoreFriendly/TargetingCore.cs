@@ -25,7 +25,7 @@ namespace VanillaExpandedLoreFriendly
         }
         private LiveMixin _target;
 
-        public string[] targetNames = new string[] { "peep" }; // #temp peep
+        public string[] targetNames = new string[] {}; 
 
         public Coroutine coroutine_targetSearching;
 

@@ -6,14 +6,30 @@ namespace VanillaExpandedLoreFriendly
 {
     public static class VETurretMethods
     {
-        private static WaitForSeconds turretPowerConsumptionDelay = new WaitForSeconds(1);
+       
+        private static WaitForSeconds turretPowerConsumptionDelay = new WaitForSeconds(1f);
         public static System.Collections.IEnumerator IPowerConsumption(this TurretBase turret)
         {
-            while(turret != null)
-            {
-                yield return turretPowerConsumptionDelay;
+            //#tested
+            bool consumeEnergyEnabled = Vars.config.turretConsumesPower;
 
+            if (consumeEnergyEnabled)
+            {
+                while (turret != null)
+                {
+                    var powerRelay = turret.powerRelay;
+
+                    // if turret is constructed & power relay exists
+                    if (turret.constructable.constructed && powerRelay != null && turret.powerStatus != PowerSystem.Status.Offline)
+                    {
+                        // consume power
+                        float amountConsumed;
+                        powerRelay.ConsumeEnergy(Vars.config.turretConsumePowerAmount, out amountConsumed);
+                    }
+                    yield return turretPowerConsumptionDelay;
+                }
             }
+            yield return null;
         }
         public static void CreateBulletPool(string poolName, GameObject prefab, int size, float lifetime, float damage, float speed)
         {
@@ -87,7 +103,7 @@ namespace VanillaExpandedLoreFriendly
                 foreach(Battery _battery in turret.ammunitions)
                 {
                     // if there is charge
-                    if(_battery.charge > 0)
+                    if(_battery != null && _battery.charge > 0)
                     {
                         firePass = true;
                         _battery.charge -= 1;
