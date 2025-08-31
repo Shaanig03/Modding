@@ -1,21 +1,29 @@
 
-About The New Version:
+Vanilla Expanded Lore Friendly
 ----------------
 
-- this is the re-written version of the Vanilla Expanded mod, the code has been re-written from scratch and there are changes, bug fixes and new content in this version, the source code is much cleaner 
-compared to the previous one and is optimized with the introducing of LODs to buildables and items, object pools for fxs and bullets, multi-language(see lang.json), more config(see config.json) options for customization, 
-the mod is also lore friendly with the base game since weapon blueprints were removed due to a event and b4 in the previous version you get turrets by picking up a peeper, but now the turrets are left remnants by the degasi crew 
-which you have to scan the fragments by exploring degasi bases
+- Note: the mod has been updated to 1.0.1, make sure ur on the latest version to avoid issues
 
-- creatures able to destroy your base and the base attack event is now a separate mod called "Base Attack"
+- About The Mod: the code has been re-written from scratch with changes, bug fixes and new content in this version, adds LODs to all buildables, uses object pools for fxs and bullets, 
+multi-language support (see lang.json), more config options (see config.json) for customization, the mod is also lore friendly with the game, with the turret weapons you have to scan the fragments in the 
+Jellyshroom Cave biome where the Degasi bases are, the turret fragments are remnants left behind by the Degasi crew, this is to make things a bit lore friendly
 
-- this new version took around a month to complete, if you wish to support me 4 my work there is a patreon button >_> (P.S: might listen to ur suggestions if u do so xd)
+- Note: the separate 'base attack' mod is canceled, I have decided to wrap things up and move on to a different project
 
+- Note: this mod took near a month to complete, if u wish to support, there is a button for that >_<
 
 Update (History):
 ----------------
 
- 
+[1.0.1] 8/31/2025
+
+
+  - [bug fix] while movement is locked you can't open the turret configuration HUD or the online HUD, 
+  this means you don't get online hud popping up when you type 'o' in the turret targeting list
+
+  - [bug fix] you should be able to use the telepad in creative mode
+
+  - [bug fix] turret update container error
 
 
 
@@ -57,4 +65,4 @@ Update (History):
 
 
 
-{online_version:1.0.0}
+{online_version:1.0.1}
